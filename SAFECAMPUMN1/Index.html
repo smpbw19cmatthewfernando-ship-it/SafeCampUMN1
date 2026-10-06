@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SafeCamp UMN</title>
+<meta name="description" content="SafeCamp UMN: platform web anti-bullying dan sistem respons darurat kampus.">
+<style>
+:root{--bg:#f8fafc;--text:#1e293b;--muted:#64748b;--soft:#94a3b8;--blue:#2563eb;--blue-dark:#1d4ed8;--blue-50:#eff6ff;--blue-100:#dbeafe;--blue-200:#bfdbfe;--green:#059669;--green-50:#ecfdf5;--amber:#d97706;--amber-50:#fffbeb;--red:#ef4444;--red-dark:#dc2626}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-width:320px;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,'Segoe UI',Arial,sans-serif;line-height:1.5}a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer;border:0;background:none}
+.app{min-height:100vh;display:flex;flex-direction:column}.container{width:100%;max-width:1120px;margin:0 auto;padding:0 16px}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--blue-100)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;max-width:1120px;margin:auto}
+.brand{display:inline-flex;align-items:center;gap:10px;font-weight:800;color:#0f172a}.brand-badge{width:34px;height:34px;display:grid;place-items:center;background:var(--blue);color:#fff;border-radius:10px;font-weight:800;font-size:12px}
+.menu{display:flex;gap:4px;align-items:center;flex-wrap:wrap}.menu button,.menu a{padding:8px 12px;border-radius:10px;color:var(--muted);font-weight:600;font-size:14px;transition:.2s}.menu button:hover,.menu a:hover{background:var(--blue-50);color:var(--blue-dark)}.menu .active{background:var(--blue-50);color:var(--blue-dark)}
+.sos-button{background:var(--red);color:#fff;padding:8px 14px;border-radius:12px;font-weight:700;display:inline-flex;align-items:center;gap:8px}.sos-button span{width:8px;height:8px;background:#fff;border-radius:999px;box-shadow:0 0 0 4px rgba(255,255,255,.18)}
+.page{display:none;animation:fade .35s ease}.page.show{display:block}main{flex:1}
+.hero{position:relative;overflow:hidden;padding:64px 16px 52px;background:linear-gradient(180deg,var(--blue-50),#fff 75%)}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;filter:blur(70px);opacity:.42}.hero::before{width:520px;height:520px;left:50%;top:-140px;transform:translateX(-50%);background:var(--blue-100)}.hero::after{width:320px;height:320px;right:-80px;top:120px;background:#d1fae5}
+.hero-content{position:relative;text-align:center;max-width:820px;margin:auto}
+.pill{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--blue-200);color:var(--blue-dark);border-radius:999px;padding:7px 14px;font-size:14px;font-weight:700}
+h1{margin:18px 0 0;font-size:clamp(34px,6vw,62px);line-height:1.03;letter-spacing:-.03em;color:#0f172a}
+.slogan{margin:18px auto 0;max-width:760px;font-size:clamp(16px,2.8vw,24px);font-weight:900;line-height:1.35;color:var(--blue-dark);text-transform:uppercase;letter-spacing:.05em}.slogan-sub{margin-top:8px;color:#0f172a;font-size:clamp(14px,2vw,16px);font-weight:700}
+.lead{max-width:720px;margin:18px auto 0;color:var(--muted);font-size:clamp(16px,2.4vw,20px);line-height:1.7}
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:28px}
+.btn{border-radius:16px;padding:14px 22px;font-weight:700;font-size:16px;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.2s}.btn-primary{background:var(--blue);color:#fff;box-shadow:0 14px 30px rgba(37,99,235,.22)}.btn-primary:hover{background:var(--blue-dark);transform:translateY(-1px)}.btn-outline{background:#fff;color:#334155;border:1px solid var(--blue-200)}.btn-outline:hover{background:var(--blue-50)}.btn-red{background:var(--red);color:#fff;box-shadow:0 14px 30px rgba(239,68,68,.24)}.btn-red:hover{background:var(--red-dark)}.btn-ghost{background:#fff;color:#334155;border:1px solid #e2e8f0}.btn-ghost:hover{background:#f8fafc}.btn-block{width:100%}
+section{padding:44px 16px}.section-title{text-align:center;margin-bottom:26px}.section-title h2{margin:0;font-size:clamp(24px,3.6vw,36px);letter-spacing:-.02em;color:#0f172a}.section-title p{margin:10px 0 0;color:var(--muted)}
+.grid{display:grid;gap:16px}.cards-3{grid-template-columns:1fr}.cards-2{grid-template-columns:1fr}.card{background:#fff;border:1px solid var(--blue-100);border-radius:20px;padding:22px;box-shadow:0 8px 24px rgba(15,23,42,.04)}
+.icon-box{width:48px;height:48px;display:grid;place-items:center;border-radius:14px;background:var(--blue-50);color:var(--blue-dark);font-size:22px}.icon-box.green{background:var(--green-50);color:var(--green)}
+.card h3{margin:14px 0 6px;color:#0f172a;font-size:18px}.card p{margin:0;color:var(--muted);font-size:15px}
+.cta{max-width:760px;margin:20px auto 0;background:linear-gradient(135deg,#2563eb,#1e40af);border-radius:28px;color:#fff;text-align:center;padding:36px 22px;box-shadow:0 18px 40px rgba(37,99,235,.22)}.cta h2{margin:0 0 8px;font-size:28px}.cta p{max-width:560px;margin:0 auto;color:#dbeafe}.cta .mini-slogan{font-weight:900;text-transform:uppercase;letter-spacing:.06em;color:#fff;margin-bottom:8px}
+.form-box{max-width:760px;margin:auto;background:#fff;border:1px solid #e2e8f0;border-radius:24px;padding:24px}.field{margin-top:18px}label{display:block;font-weight:700;color:#0f172a;margin-bottom:8px;font-size:15px}.hint{color:var(--soft);font-size:13px;margin-top:6px}
+input[type=text],textarea{width:100%;border:1px solid #cbd5e1;background:#f8fafc;border-radius:14px;padding:13px 14px;color:#0f172a;outline:none;font-size:15px}input:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(37,99,235,.12)}
+.choice-grid{display:grid;gap:10px;grid-template-columns:1fr}.choice{border:1px solid #e2e8f0;background:#fff;border-radius:16px;padding:14px;text-align:left}.choice strong{display:block;margin-bottom:4px}.choice small{color:var(--muted)}.choice.selected{border-color:var(--blue);background:var(--blue-50)}
+.status-banner{display:none;margin-top:18px;background:var(--green-50);border:1px solid #a7f3d0;color:#065f46;border-radius:16px;padding:16px}.status-banner.show{display:block}.status-banner b{display:block;margin-top:8px;color:#047857;font-size:18px}
+.result-banner{display:none;margin-top:20px;border-radius:22px;padding:24px;color:#fff;background:linear-gradient(135deg,#16a34a,#059669)}.result-banner.show{display:block}.result-banner .score{opacity:.85;font-size:14px;margin-top:4px}.result-banner h3{margin:0 0 10px;font-size:24px}.result-banner p{margin:0;opacity:.96}
+.progress{height:10px;background:#e2e8f0;border-radius:999px;margin-top:10px;overflow:hidden}.progress span{display:block;height:100%;width:0;background:var(--blue);border-radius:inherit;transition:.25s}.step-label{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin-bottom:8px}
+.alert{border:1px solid #fde68a;background:#fffbeb;color:#92400e;border-radius:16px;padding:14px;margin-top:16px;font-size:14px}.info{border:1px solid var(--blue-100);background:var(--blue-50);color:var(--blue-dark);border-radius:16px;padding:14px;margin-top:16px;font-size:14px}
+.floating-sos{position:fixed;right:20px;bottom:20px;z-index:60;width:58px;height:58px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;box-shadow:0 14px 28px rgba(239,68,68,.32);animation:pulse 2s infinite}
+.foot{padding:28px 16px;background:#fff;border-top:1px solid var(--blue-100);color:var(--muted);font-size:13px}.foot-grid{display:grid;gap:16px}.foot-grid strong{color:#0f172a}.foot-slogan{font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:var(--blue-dark);margin-top:4px}
+.tag{display:inline-flex;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:800}.tag.green{background:#d1fae5;color:#065f46}.tag.blue{background:var(--blue-50);color:var(--blue-dark)}.tag.amber{background:var(--amber-50);color:#92400e}.timeline{margin-top:18px;display:grid;gap:12px}.timeline-item{border:1px solid #e2e8f0;border-radius:16px;padding:14px;background:#fff}
+@media(min-width:768px){.cards-3{grid-template-columns:repeat(3,1fr)}.cards-2{grid-template-columns:repeat(2,1fr)}.choice-grid{grid-template-columns:repeat(2,1fr)}.foot-grid{grid-template-columns:repeat(3,1fr)}.field-inline{display:grid;grid-template-columns:2fr 1fr;gap:12px;align-items:end}}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(239,68,68,.45)}70%{box-shadow:0 0 0 18px rgba(239,68,68,0)}100%{box-shadow:0 0 0 0 rgba(239,68,68,0)}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="nav"><div class="nav-inner">
+<a class="brand" href="#home" data-route="home"><span class="brand-badge">SC</span><span>SafeCamp UMN</span></a>
+<nav class="menu" aria-label="Navigasi utama">
+<button data-route="home">Beranda</button><button data-route="triase">Triase</button><button data-route="lapor">Lapor</button><button data-route="panduan">Panduan</button><button data-route="tracking">Tracking</button><button data-route="tentang">Tentang</button>
+<a class="sos-button" href="#sos"><span></span> SOS</a>
+</nav>
+</div></header>
+
+<main>
+<section class="page show" id="page-home">
+<div class="hero"><div class="hero-content">
+<div class="pill">🛡️ Platform Anti-Bullying UMN</div>
+<h1>Kamu Tidak Sendiri. Kami Bersamamu.</h1>
+<div class="slogan">Breaking the Silent Chains.<br>Empowering Voices.<br>Saving Lives.</div>
+<p class="slogan-sub">Tagline resmi SafeCamp UMN</p>
+<p class="lead">SafeCamp UMN membantu mahasiswa yang mengalami perundungan atau pelecehan menilai risiko secara instan, mendapat panduan taktis langsung, dan eskalasi cepat ke Student Services — tanpa birokrasi.</p>
+<div class="actions"><button class="btn btn-primary" data-route="triase">Mulai Triase Risiko →</button><button class="btn btn-outline" data-route="lapor">Buat Laporan</button></div>
+</div></div>
+
+<div class="container">
+<div class="section-title"><h2>Fitur Utama</h2><p>Desain trauma-informed untuk keamanan, kenyamanan, dan privasimu</p></div>
+<div class="grid cards-3">
+<div class="card"><div class="icon-box">💙</div><h3>Empati & Kenyamanan</h3><p>Antarmuka menenangkan, bahasa suportif, dan langkah pelaporan yang tidak mengintimidasi korban.</p></div>
+<div class="card"><div class="icon-box">🔍</div><h3>Transparansi Proses</h3><p>Pantau alur pelaporan dengan tracking ID dan status yang jelas, dari diterimanya laporan hingga tindak lanjut.</p></div>
+<div class="card"><div class="icon-box">🔒</div><h3>Privasi & Anonimitas</h3><p>Anda bisa melapor secara anonim. Data identifikasi dapat disembunyikan dan hanya diketahui tim penanggung jawab.</p></div>
+</div>
+
+<div class="cta"><h2>Butuh Bantuan Sekarang?</h2><div class="mini-slogan">Breaking the Silent Chains. Empowering Voices. Saving Lives.</div><p>Jika kamu dalam situasi darurat atau butuh bicara dengan seseorang, tim Student Services siap membantu.</p><div class="actions"><button class="btn btn-red" data-route="sos">📞 Emergency SOS</button><a class="btn btn-ghost" href="tel:+622112345678">+62-21-1234-5678</a></div></div>
+</div>
+</section>
+
+<section class="page" id="page-triase">
+<div class="container" style="max-width:760px">
+<div class="section-title"><h2>Triase Risiko Instan</h2><p>Jawab beberapa pertanyaan untuk menilai tingkat risiko situasi kamu. Hasil bersifat indikatif dan tidak menggantikan penanganan profesional.</p></div>
+<div class="form-box">
+<div class="step-label"><span id="triase-step">Pertanyaan 1 dari 6</span><span id="triase-percent">17%</span></div>
+<div class="progress"><span id="triase-progress" style="width:17%"></span></div>
+<div id="triase-question" style="margin-top:18px;font-weight:700;color:#0f172a;font-size:18px"></div>
+<div class="choice-grid" id="triase-options" style="margin-top:14px"></div>
+<div class="status-banner" id="triase-result"></div>
+<div class="actions" style="margin-top:18px"><button class="btn btn-ghost" id="triase-back">← Kembali</button><button class="btn btn-ghost" id="triase-restart">Ulangi</button></div>
+</div>
+<div class="result-banner" id="triase-final"><h3 id="final-title">Risiko Rendah</h3><p id="final-message"></p><div class="score" id="final-score"></div></div>
+</div>
+</section>
+
+<section class="page" id="page-lapor">
+<div class="container" style="max-width:760px">
+<div class="section-title"><h2>Formulir Pelaporan</h2><p>Kamu bisa memilih pelaporan anonim atau rahasia. Data penting akan digunakan untuk penanganan kasus.</p></div>
+<div class="form-box"><div class="alert">⚠️ Jika kamu dalam bahaya langsung, gunakan tombol SOS atau hubungi pihak berwenang terlebih dahulu.</div>
+<form id="lapor-form">
+<div class="field"><label>Jenis Pelaporan</label><div class="choice-grid" id="report-type"></div></div>
+<div class="field"><label>Jenis Perundungan yang Dialami</label><div class="choice-grid" id="bullying-type"></div></div>
+<div class="field"><label for="lapor-nama">Nama (boleh kosong jika anonim)</label><input type="text" id="lapor-nama" placeholder="Opsional"></div>
+<div class="field"><label for="lapor-tanggal">Kapan Kejadian Terjadi?</label><input type="text" id="lapor-tanggal" placeholder="Contoh: 3 hari lalu / Senin sore"></div>
+<div class="field"><label for="lapor-lokasi">Lokasi / Tempat Kejadian</label><input type="text" id="lapor-lokasi" placeholder="Contoh: area kampus, online, asrama, dll"></div>
+<div class="field"><label for="lapor-deskripsi">Ceritakan Apa yang Terjadi</label><textarea id="lapor-deskripsi" rows="6" placeholder="Tuliskan dengan kata-katamu sendiri. Kamu tidak perlu terburu-buru."></textarea></div>
+<div class="field"><label for="lapor-bukti">Lampiran / Bukti</label><input type="text" id="lapor-bukti" placeholder="Contoh: screenshot chat, link media sosial, nama saksi, dll"></div>
+<div class="status-banner" id="lapor-success"><div>✅ <strong>Laporan berhasil dibuat.</strong> Simpan ID tracking di bawah ini untuk memantau status laporan.</div><b id="lapor-tracking">-</b></div>
+<div class="actions" style="margin-top:20px"><button class="btn btn-primary btn-block" type="submit">Kirim Laporan</button><button class="btn btn-ghost btn-block" type="button" id="lapor-draft">Simpan Draf</button></div>
+</form>
+</div>
+</div>
+</section>
+
+<section class="page" id="page-panduan">
+<div class="container" style="max-width:820px">
+<div class="section-title"><h2>Panduan Taktis Langkah Demi Langkah</h2><p>Panduan praktis berdasarkan tingkat risiko dari hasil triase dan kebutuhan penanganan kasus perundungan kampus.</p></div>
+<div class="grid cards-2">
+<div class="card"><div class="icon-box">1️⃣</div><h3>Langkah 1: Pastikan Aman</h3><p>Jika dalam bahaya langsung, segera cari tempat aman, hubungkan diri dengan orang yang dipercaya, atau tekan Emergency SOS.</p></div>
+<div class="card"><div class="icon-box">2️⃣</div><h3>Langkah 2: Dokumentasikan Bukti</h3><p>Simpan screenshot, chat, rekaman, kronologi, dan nama saksi jika memungkinkan. Jangan hapus bukti digital.</p></div>
+<div class="card"><div class="icon-box">3️⃣</div><h3>Langkah 3: Buat Laporan</h3><p>Gunakan formulir pelaporan di halaman Lapor. Kamu bisa memilih anonim atau rahasia sesuai kebutuhan dan tingkat keamananmu.</p></div>
+<div class="card"><div class="icon-box">4️⃣</div><h3>Langkah 4: Pantau Status</h3><p>Gunakan tracking ID untuk mengetahui progres penanganan laporan. Transparansi membantu mengurangi kecemasan.</p></div>
+<div class="card"><div class="icon-box">5️⃣</div><h3>Langkah 5: Dapatkan Pendampingan</h3><p>Minta pendampingan dari Student Services, konselor, atau orang yang kamu percaya selama proses penanganan.</p></div>
+<div class="card"><div class="icon-box">6️⃣</div><h3>Langkah 6: Cegah Berulang</h3><p>Sebarkan awareness anti-bullying, jaga privasi digital, dan bantu teman yang mengalami perundungan dengan melaporkan secara aman.</p></div>
+</div>
+</div>
+</section>
+
+<section class="page" id="page-tracking">
+<div class="container" style="max-width:760px">
+<div class="section-title"><h2>Tracking Status Laporan</h2><p>Masukkan ID tracking yang kamu terima setelah membuat laporan.</p></div>
+<div class="form-box">
+<form id="tracking-form" class="field-inline"><div class="field"><label for="tracking-input">ID Tracking</label><input type="text" id="tracking-input" placeholder="Contoh: SC-2024-001"></div><div class="field"><button class="btn btn-primary btn-block" type="submit">Cari Status</button></div></form>
+<div class="status-banner" id="tracking-result"><div id="tracking-summary"></div><div class="timeline" id="tracking-timeline"></div></div>
+<div class="info">💡 Contoh ID yang tersedia untuk demo: <b>SC-2024-001</b>, <b>SC-2024-002</b>, <b>SC-2024-003</b>, <b>SC-2024-004</b></div>
+</div>
+</div>
+</section>
+
+<section class="page" id="page-sos">
+<div class="container" style="max-width:760px">
+<div class="section-title"><h2>Emergency SOS</h2><p>Halaman ini dibuat untuk situasi darurat. Hubungi Student Services atau jalur darurat terkait secepat mungkin.</p></div>
+<div class="form-box"><div class="alert">🔴 Jika kamu dalam bahaya langsung, segera hubungi nomor darurat di lingkungan kampus atau ke pihak berwenang.</div>
+<div class="grid cards-2">
+<div class="card"><div class="icon-box">📞</div><h3>Student Services</h3><p>+62-21-1234-5678<br>studentservices@umn.ac.id</p></div>
+<div class="card"><div class="icon-box">📸</div><h3>Instagram</h3><p>@umnstudentservices</p></div>
+<div class="card"><div class="icon-box">🚨</div><h3>Polisi</h3><p>110</p></div>
+<div class="card"><div class="icon-box">🩺</div><h3>Kesehatan Mental</h3><p>Hubungi konselor kampus / layanan kesehatan mental terdekat</p></div>
+</div>
+<div class="info"><strong>Sambil menunggu bantuan:</strong><ul style="margin:8px 0 0;padding-left:18px;color:var(--muted)"><li>Cari tempat aman dan ramai</li><li>Hubungi teman atau orang terdekat untuk menemanimu</li><li>Jangan hapus bukti yang kamu miliki</li><li>Kamu berhak mendapat pendampingan</li></ul></div>
+<div class="actions" style="margin-top:20px"><a class="btn btn-red" href="tel:+622112345678">📞 Hubungi Sekarang</a><button class="btn btn-ghost" data-route="lapor">Buat Laporan Resmi</button></div>
+</div>
+</div>
+</section>
+
+<section class="page" id="page-tentang">
+<div class="container" style="max-width:820px">
+<div class="section-title"><h2>Tentang SafeCamp UMN</h2><p>Profil proyek, target SDGs, referensi jurnal, dan tim pengembang.</p></div>
+<div class="card" style="margin-bottom:16px"><h3>Profil Proyek</h3><p>SafeCamp UMN adalah platform web anti-bullying dan sistem respons darurat kampus yang dirancang untuk memangkas rantai birokrasi penanganan perundungan di lingkungan Universitas Multimedia Nusantara.</p></div>
+<div class="grid cards-2" style="margin-bottom:16px">
+<div class="card"><div class="icon-box green">🌱</div><h3>SDG 3</h3><p>Good Health and Well-Being — mempercepat intervensi dini dan mengurangi dampak psikologis akibat keterlambatan penanganan.</p></div>
+<div class="card"><div class="icon-box">⚖️</div><h3>SDG 16</h3><p>Peace, Justice, and Strong Institutions — memperkuat kapasitas kelembagaan kampus dalam merespons kasus secara cepat dan akuntabel.</p></div>
+</div>
+<div class="card" style="margin-bottom:16px"><h3>Referensi Jurnal</h3><ul style="margin:8px 0 0;padding-left:18px;color:var(--muted)"><li>Mzilangwe et al. — Synthesising Literature on Sexual Violence among University Students in Sub-Saharan Africa</li><li>Flynn, Henry & Powell — Image-Based Sexual Abuse and Technology-Facilitated Sexual Violence Among University Students: A Scoping Review</li><li>Lee & Koh (2026) — Designing a Trauma-Informed Safety by Design Framework for Nonconsensual Intimate Image Removal Platforms</li></ul></div>
+<div class="card"><h3>Tim Pengembang</h3><ul style="margin:8px 0 0;padding-left:18px;color:var(--muted)"><li>Abdullah Sholeh — Ketua Tim</li><li>Matthew Fernando Sheldon — Anggota</li><li>Steven Salo Siswadi — Anggota</li><li>Rafael William Bernhart G. — Anggota</li><li>Reef Tristan Laisina — Anggota</li><li>Abner Zephanya Pardede — Anggota</li></ul></div>
+</div>
+</section>
+</main>
+
+<footer class="foot"><div class="container foot-grid">
+<div><strong>SafeCamp UMN</strong><br>Platform anti-bullying dan respons darurat kampus.</div>
+<div><strong>Kontak Darurat</strong><br>Student Services: +62-21-1234-5678<br>Email: studentservices@umn.ac.id</div>
+<div><strong>Kelompok 2</strong><br>Week 1 — User Experience<br><span class="foot-slogan">Breaking the Silent Chains. Empowering Voices. Saving Lives.</span></div>
+</div></footer>
+</div>
+
+<a class="floating-sos" href="#sos" aria-label="Emergency SOS">📞</a>
+
+<script>
+const SLOGAN="Breaking the Silent Chains. Empowering Voices. Saving Lives.";
+const triaseQuestions=[
+{q:"Apakah kamu mengalami kekerasan fisik (dipukul, ditampar, didorong, atau dianiaya secara fisik)?",options:[{label:"Ya, baru saja terjadi",value:4},{label:"Ya, pernah terjadi sebelumnya",value:3},{label:"Tidak",value:0}]},
+{q:"Apakah kamu mengalami pelecehan atau kekerasan seksual (dipaksa melakukan kontak seksual, diraba tanpa izin, atau ancaman seksual)?",options:[{label:"Ya, baru saja terjadi",value:4},{label:"Ya, pernah terjadi sebelumnya",value:3},{label:"Tidak",value:0}]},
+{q:"Apakah kamu menjadi korban perundungan siber — dihina, diancam, atau disebarkan konten pribadi di media sosial/pesan?",options:[{label:"Ya, berulang kali",value:3},{label:"Ya, pernah sekali",value:2},{label:"Tidak",value:0}]},
+{q:"Apakah kamu mengalami pengucilan sosial, digosipkan, atau dijauhi oleh teman/kelompok secara sengaja?",options:[{label:"Ya, berulang kali",value:2},{label:"Ya, pernah sekali",value:1},{label:"Tidak",value:0}]},
+{q:"Apakah kamu mendapat ancaman atau intimidasi secara verbal (dibentak, dihina, atau direndahkan)?",options:[{label:"Ya, berulang kali",value:2},{label:"Ya, pernah sekali",value:1},{label:"Tidak",value:0}]},
+{q:"Apakah kamu saat ini merasa tidak aman atau takut akan keselamatanmu di lingkungan kampus?",options:[{label:"Ya, sangat takut",value:4},{label:"Ya, agak khawatir",value:2},{label:"Tidak, saya merasa aman",value:0}]}
+];
+function hitungTriase(skor){if(skor>=14)return{title:"DARURAT — Butuh Tindakan Segera",message:"Situasimu sangat serius. Sebaiknya hubungi Emergency SOS atau UMN Student Services sekarang, dan cari tempat aman.",warna:"linear-gradient(135deg,#d97706,#ea580c)",panduan:["Segera hubungi UMN Student Services atau klik halaman Emergency SOS.","Jika dalam bahaya langsung, hubungi pihak berwenang (Polisi: 110).","Jangan tetap di tempat yang tidak aman. Cari tempat ramai dan aman.","Bawa teman yang kamu percaya untuk menemanimu.","Setelah aman, buat laporan resmi melalui formulir pelaporan.","Kamu berhak mendapat pendampingan psikologis."]};if(skor>=8)return{title:"RISIKO TINGGI — Perlu Ditindaklanjuti",message:"Situasi cukup serius. Kami sarankan segera membuat laporan agar mendapat penanganan yang tepat.",warna:"linear-gradient(135deg,#f59e0b,#d97706)",panduan:["Buat laporan melalui formulir pelaporan (bisa anonim).","Simpan bukti-bukti yang kamu miliki.","Hubungi UMN Student Services untuk konsultasi.","Dampingi oleh konselor kampus jika perlu.","Bercerita pada orang yang kamu percaya."];}if(skor>=4)return{title:"RISIKO SEDANG — Perlu Diwaspadai",message:"Kamu mengalami situasi yang tidak nyaman. Ambil langkah antisipasi agar tidak memburuk.",warna:"linear-gradient(135deg,#facc15,#ca8a04)",panduan:["Catat dan dokumentasikan kejadian yang dialami.","Bicarakan dengan teman atau keluarga yang dipercaya.","Pertimbangkan membuat laporan anonim.","Pelajari panduan taktis untuk perlindungan diri.","Jika memburuk, segera hubungi Student Services."];};return{title:"RISIKO RENDAH — Tetap Jaga Diri",message:"Berdasarkan penilaian awal, situasimu tergolong aman. Namun kamu tetap berhak mendapat dukungan kapan pun.",warna:"linear-gradient(135deg,#22c55e,#059669)",panduan:["Tetap gunakan layanan jika perlu berbicara atau melapor.","Pelajari panduan pencegahan perundungan.","Bagikan informasi SafeCamp UMN ke teman yang membutuhkan.","Jaga kesehatan mental — istirahat cukup dan lakukan hal yang kamu nikmati."]};}
+const jenisBullying=[{id:"verbal",label:"Verbal",deskripsi:"Penghinaan, makian, bentakan, atau kata-kata merendahkan"},{id:"sosial",label:"Sosial / Relasional",deskripsi:"Pengucilan, gosip, rumor, atau dikucilkan dari kelompok"},{id:"cyber",label:"Cyber / Digital",deskripsi:"Perundungan via media sosial, pesan, atau penyebaran konten pribadi"},{id:"fisik",label:"Fisik",deskripsi:"Pukulan, dorongan, tendangan, atau kekerasan fisik lainnya"}];
+const laporanStatusList=[{id:"SC-2024-001",status:"selesai",tanggal:"12 Jan 2025",deskripsi:"Laporan perundungan verbal — telah ditindaklanjuti",langkah:["Laporan diterima","Diproses","Selesai"]},{id:"SC-2024-002",status:"proses",tanggal:"15 Jan 2025",deskripsi:"Laporan cyberbullying — sedang dalam penanganan",langkah:["Laporan diterima","Sedang diproses","Menunggu tindak lanjut"]},{id:"SC-2024-003",status:"diterima",tanggal:"18 Jan 2025",deskripsi:"Laporan kekerasan fisik — telah diterima, menunggu tindak lanjut",langkah:["Laporan diterima","Belum diproses","Belum selesai"]},{id:"SC-2024-004",status:"selesai",tanggal:"20 Jan 2025",deskripsi:"Laporan pelecehan — sanksi akademik telah diberikan",langkah:["Laporan diterima","Diproses","Sanksi diberikan"]}];
+const routes=["home","triase","lapor","panduan","tracking","sos","tentang"];
+function navigate(route){if(!routes.includes(route))route="home";history.replaceState(null,"","#"+route);document.querySelectorAll(".page").forEach(el=>el.classList.remove("show"));document.getElementById("page-"+route).classList.add("show");document.querySelectorAll(".menu button[data-route]").forEach(btn=>btn.classList.toggle("active",btn.dataset.route===route));window.scrollTo(0,0);}
+document.addEventListener("click",e=>{const r=e.target.closest("[data-route]");if(r){e.preventDefault();navigate(r.dataset.route);}});
+window.addEventListener("hashchange",()=>navigate(location.hash.replace("#","")||"home"));
+let triaseIndex=0,triaseAnswers={};
+function renderTriase(){const q=triaseQuestions[triaseIndex],percent=Math.round(((triaseIndex+1)/triaseQuestions.length)*100);document.getElementById("triase-step").textContent=`Pertanyaan ${triaseIndex+1} dari ${triaseQuestions.length}`;document.getElementById("triase-percent").textContent=percent+"%";document.getElementById("triase-progress").style.width=percent+"%";document.getElementById("triase-question").textContent=q.q;document.getElementById("triase-options").innerHTML=q.options.map(opt=>`<button class="choice" data-value="${opt.value}"><strong>${opt.label}</strong><small>Skor: ${opt.value}</small></button>`).join("");document.querySelectorAll("#triase-options .choice").forEach(btn=>btn.addEventListener("click",()=>{triaseAnswers[triaseIndex]=parseInt(btn.dataset.value,10);document.querySelectorAll("#triase-options .choice").forEach(b=>b.classList.remove("selected"));btn.classList.add("selected");if(triaseIndex<triaseQuestions.length-1){triaseIndex++;renderTriase();}else{showTriaseResult();}}));document.getElementById("triase-back").style.visibility=triaseIndex>0?"visible":"hidden";document.getElementById("triase-result").classList.remove("show");document.getElementById("triase-final").classList.remove("show");}
+function showTriaseResult(){const score=Object.values(triaseAnswers).reduce((a,b)=>a+b,0);const result=hitungTriase(score);document.getElementById("final-title").textContent=result.title;document.getElementById("final-message").textContent=result.message;document.getElementById("final-score").textContent=`Skor risiko: ${score} / ${triaseQuestions.length*4}`;document.getElementById("triase-final").style.background=result.warna;document.getElementById("triase-final").classList.add("show");document.getElementById("triase-result").innerHTML=`<div style="margin-top:12px;font-size:15px;line-height:1.7"><strong>Panduan taktis otomatis:</strong><br>${result.panduan.map(p=>"• "+p).join("<br>")}</div>`;document.getElementById("triase-result").classList.add("show");}
+document.getElementById("triase-back").addEventListener("click",()=>{if(triaseIndex>0){triaseIndex--;renderTriase();}});
+document.getElementById("triase-restart").addEventListener("click",()=>{triaseIndex=0;triaseAnswers={};renderTriase();});
+function renderChoiceGroup(containerId,items,allowMultiple){const container=document.getElementById(containerId);const selected=JSON.parse(localStorage.getItem("safecamp_"+containerId)||"[]");container.innerHTML=items.map(item=>`<button class="choice ${selected.includes(item.id)?"selected":""}" data-id="${item.id}" type="button"><strong>${item.label}</strong><small>${item.deskripsi}</small></button>`).join("");container.querySelectorAll(".choice").forEach(btn=>btn.addEventListener("click",()=>{if(allowMultiple){btn.classList.toggle("selected");}else{container.querySelectorAll(".choice").forEach(b=>b.classList.remove("selected"));btn.classList.add("selected");}localStorage.setItem("safecamp_"+containerId,JSON.stringify(Array.from(container.querySelectorAll(".choice.selected")).map(b=>b.dataset.id)));}));}
+renderChoiceGroup("report-type",[{id:"anonim",label:"Anonim",deskripsi:"Tanpa identitas pelapor. Cocok jika kamu merasa tidak aman."},{id:"rahasia",label:"Rahasia",deskripsi:"Identitas hanya diketahui oleh tim penanggung jawab."}],false);
+renderChoiceGroup("bullying-type",jenisBullying,true);
+document.getElementById("lapor-form").addEventListener("submit",e=>{e.preventDefault();const nama=document.getElementById("lapor-nama").value.trim(),deskripsi=document.getElementById("lapor-deskripsi").value.trim();if(!deskripsi){alert("Mohon ceritakan apa yang terjadi terlebih dahulu.");return;}const trackingId="SC-"+Date.now().toString(36).toUpperCase();const laporan={id:trackingId,nama,deskripsi,tanggalLapor:new Date().toLocaleString("id-ID"),status:"diterima",langkah:["Laporan diterima","Menunggu verifikasi","Belum diproses"]};const existing=JSON.parse(localStorage.getItem("safecamp_laporan")||"[]");existing.push(laporan);localStorage.setItem("safecamp_laporan",JSON.stringify(existing));document.getElementById("lapor-tracking").textContent="ID Tracking: "+trackingId;document.getElementById("lapor-success").classList.add("show");document.getElementById("lapor-form").reset();["report-type","bullying-type"].forEach(id=>{localStorage.setItem("safecamp_"+id,JSON.stringify([]));renderChoiceGroup(id,id==="report-type"?[{id:"anonim",label:"Anonim",deskripsi:"Tanpa identitas pelapor."},{id:"rahasia",label:"Rahasia",deskripsi:"Identitas hanya diketahui oleh tim penanggung jawab."}]:jenisBullying,id==="bullying-type");});window.scrollTo({top:0,behavior:"smooth"});});
+document.getElementById("lapor-draft").addEventListener("click",()=>{localStorage.setItem("safecamp_draft",JSON.stringify({nama:document.getElementById("lapor-nama").value,tanggal:document.getElementById("lapor-tanggal").value,lokasi:document.getElementById("lapor-lokasi").value,deskripsi:document.getElementById("lapor-deskripsi").value,bukti:document.getElementById("lapor-bukti").value}));alert("Draf berhasil disimpan.");});
+function loadDraft(){const raw=localStorage.getItem("safecamp_draft");if(!raw)return;const d=JSON.parse(raw);document.getElementById("lapor-nama").value=d.nama||"";document.getElementById("lapor-tanggal").value=d.tanggal||"";document.getElementById("lapor-lokasi").value=d.lokasi||"";document.getElementById("lapor-deskripsi").value=d.deskripsi||"";document.getElementById("lapor-bukti").value=d.bukti||"";}
+document.getElementById("tracking-form").addEventListener("submit",e=>{e.preventDefault();const id=document.getElementById("tracking-input").value.trim().toUpperCase();const local=JSON.parse(localStorage.getItem("safecamp_laporan")||"[]");const data=local.find(l=>l.id===id)||laporanStatusList.find(l=>l.id===id);const result=document.getElementById("tracking-result"),summary=document.getElementById("tracking-summary"),timeline=document.getElementById("tracking-timeline");if(data){result.classList.add("show");const statusTag=data.status==="selesai"?"green":data.status==="proses"?"amber":"blue";summary.innerHTML=`<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><div><div style="font-size:13px;color:var(--muted)">ID Laporan</div><div style="font-size:20px;font-weight:800;color:#0f172a">${data.id}</div></div><span class="tag ${statusTag}">${data.status}</span></div><p style="margin-top:12px;color:var(--muted)">${data.deskripsi||""}</p><p style="margin-top:6px;font-size:13px;color:var(--soft)">Dilaporkan: ${data.tanggalLapor||data.tanggal||"-"}</p>`;timeline.innerHTML=(data.langkah||[]).map((l,i)=>{const active=(i===0&&data.status==="diterima")||(i===1&&data.status==="proses")||data.status==="selesai";return `<div class="timeline-item"><span class="tag ${active?"green":"blue"}">${active?"Aktif":"Menunggu"}</span> ${l}</div>`;}).join("");}else{result.classList.add("show");summary.innerHTML=`<div style="color:#92400e;font-weight:700">⚠️ ID ${id||"-"} tidak ditemukan.</div><p style="margin-top:8px;color:var(--muted)">Pastikan ID tracking sudah benar. Coba gunakan contoh demo.</p>`;timeline.innerHTML="";}});
+navigate(location.hash.replace("#","")||"home");renderTriase();loadDraft();
+</script>
+</body>
+</html>
